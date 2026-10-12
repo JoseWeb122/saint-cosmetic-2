@@ -1,0 +1,220 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-espresso: #17100c;
+  --color-cocoa: #221610;
+  --color-bark: #2e1f16;
+  --color-ink: #33241a;
+  --color-ivory: #faf6ee;
+  --color-cream: #f3ecdd;
+  --color-sand: #e7dbc3;
+  --color-linen: #efe6d4;
+  --color-gold: #c8a24b;
+  --color-golddeep: #a37e2e;
+  --color-champagne: #e3c98c;
+  --color-clay: #9a5b3c;
+  --color-cocoa-soft: #6f5b4a;
+  --color-taupe: #8a7663;
+
+  --font-display: "Cormorant Garamond", "Georgia", serif;
+  --font-body: "Jost", "Helvetica Neue", Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-body);
+  background: var(--color-ivory);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: hidden;
+}
+
+::selection {
+  background: var(--color-gold);
+  color: var(--color-espresso);
+}
+
+/* ---------- scrollbar ---------- */
+::-webkit-scrollbar { width: 10px; }
+::-webkit-scrollbar-track { background: var(--color-cream); }
+::-webkit-scrollbar-thumb { background: #c9b48c; border-radius: 0; }
+::-webkit-scrollbar-thumb:hover { background: var(--color-golddeep); }
+
+/* ---------- scroll reveal ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(34px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1), transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-left {
+  opacity: 0;
+  transform: translateX(-44px);
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-left.is-visible { opacity: 1; transform: translateX(0); }
+.reveal-right {
+  opacity: 0;
+  transform: translateX(44px);
+  transition: opacity 1s cubic-bezier(0.22, 1, 0.36, 1), transform 1s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-right.is-visible { opacity: 1; transform: translateX(0); }
+.reveal-scale {
+  opacity: 0;
+  transform: scale(1.045);
+  transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.4s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+.reveal-scale.is-visible { opacity: 1; transform: scale(1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-left, .reveal-right, .reveal-scale {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .animate-marquee, .animate-kenburns, .animate-fade-up { animation: none !important; }
+}
+
+/* ---------- keyframes ---------- */
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+.animate-marquee {
+  animation: marquee 36s linear infinite;
+}
+
+@keyframes kenburns {
+  from { transform: scale(1.12) translateY(-1.5%); }
+  to { transform: scale(1) translateY(0); }
+}
+.animate-kenburns {
+  animation: kenburns 2.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fadeUp 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+.animate-fade-in { animation: fadeIn 0.5s ease both; }
+
+@keyframes slideInRight {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+.animate-slide-in-right { animation: slideInRight 0.45s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(48px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-slide-up { animation: slideUp 0.5s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes toastIn {
+  from { opacity: 0; transform: translateY(16px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+.animate-toast { animation: toastIn 0.35s cubic-bezier(0.22, 1, 0.36, 1) both; }
+
+@keyframes lineGrow {
+  from { transform: scaleX(0); }
+  to { transform: scaleX(1); }
+}
+.animate-line { animation: lineGrow 1.2s cubic-bezier(0.22, 1, 0.36, 1) both; transform-origin: left; }
+
+@keyframes softPulse {
+  0%, 100% { opacity: 0.55; }
+  50% { opacity: 1; }
+}
+.animate-soft-pulse { animation: softPulse 2.4s ease-in-out infinite; }
+
+/* ---------- typography helpers ---------- */
+.eyebrow {
+  font-family: var(--font-body);
+  font-size: 0.68rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.hairline {
+  height: 1px;
+  background: currentColor;
+  opacity: 0.22;
+}
+
+/* elegant image treatment */
+.img-warm {
+  filter: saturate(0.94) contrast(1.03) sepia(0.08);
+}
+
+/* underline link sweep */
+.link-sweep {
+  position: relative;
+}
+.link-sweep::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 1px;
+  width: 100%;
+  background: var(--color-gold);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+.link-sweep:hover::after,
+.link-sweep.active::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+/* input styling */
+.field {
+  width: 100%;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid rgba(51, 36, 26, 0.25);
+  padding: 0.7rem 0;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.3s ease;
+  border-radius: 0;
+  color: var(--color-ink);
+}
+.field:focus { border-color: var(--color-golddeep); }
+.field::placeholder { color: #a08b74; }
+.field-dark {
+  border-bottom-color: rgba(250, 246, 238, 0.28);
+  color: var(--color-ivory);
+}
+.field-dark:focus { border-color: var(--color-gold); }
+.field-dark::placeholder { color: rgba(250, 246, 238, 0.45); }
+select.field { appearance: none; cursor: pointer; }
+input[type="date"].field, input[type="time"].field { cursor: pointer; }
+
+/* hide number input arrows */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
